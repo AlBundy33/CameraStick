@@ -16,6 +16,8 @@ There was no need to install WinAVR because Arduino IDE has also included avrdud
 /Applications/Arduino.app/Contents/Java/hardware/tools/avr/bin/avrdude -C /Applications/Arduino.app/Contents/Java/hardware/tools/avr/etc/avrdude.conf -v -p attiny85 -c avrisp -P /dev/cu.usbmodem14201 -b 19200 -n   
 /Applications/Arduino.app/Contents/Java/hardware/tools/avr/bin/avrdude -C /Applications/Arduino.app/Contents/Java/hardware/tools/avr/etc/avrdude.conf -v -p attiny85 -c avrisp -P /dev/cu.usbmodem14201 -b 19200 -U hfuse:w:0x5F:m
 ```
+# wiring diagram
+![wiring diagram](images/wiring_diagram.png)
 
-TODO:
+# TODO
 - test with Euro Truck Simulator 2
