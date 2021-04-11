@@ -15,9 +15,10 @@
 
 // define input behavior
 #define DEADZONE 20
-#define MOVE_DELAY 10
-#define SCROLL_DELAY 250
 #define ABS_RANGE 15
+#define SWITCH_TO_FAST_RANGE 4/5
+#define FAST_FACTOR 0.5
+#define SLOW_FACTOR 1.5
 
 // store states
 unsigned long buttonPressTime = 0L;
@@ -51,18 +52,23 @@ void loop() {
   x = map(x, -512, 512, -1 * ABS_RANGE, ABS_RANGE);
   y = map(y, -512, 512, -1 * ABS_RANGE, ABS_RANGE);
 
+  // handle different speeds
+  double delayFactor;
+  if ((x != 0 && abs(x) >= ABS_RANGE * SWITCH_TO_FAST_RANGE)
+    || (y != 0 && abs(y) >= ABS_RANGE * SWITCH_TO_FAST_RANGE))
+    delayFactor = FAST_FACTOR;
+  else
+    delayFactor = SLOW_FACTOR;
+
   #ifndef DIGISPARK
-    Serial.print("x=");
-    Serial.print(x);
-    Serial.print(", y=");
-    Serial.print(y);
-    Serial.print(", button=");
-    Serial.print(buttonState ? "HIGH" : "LOW");
-    Serial.print(", buttonPressTime=");
-    Serial.print(buttonPressTime);
-    Serial.print(", scrollMode=");
-    Serial.print(scrollMode ? "true" : "false");
-    Serial.println();
+    Serial.println(
+      "x=" + String(x)
+      + ", y=" + String(y)
+      + ", delayFactor=" + String(delayFactor)
+      + ", buttonState=" + (buttonState ? "HIGH" : "LOW")
+      + ", buttonPressTime=" + String(buttonPressTime)
+      + ", scrollMode=" + (scrollMode ? "true" : "false")
+    );
   #endif
 
   // check button
@@ -74,7 +80,7 @@ void loop() {
   } else {
     if (buttonPressTime > 0L) {
       // Button released
-      if (millis() - buttonPressTime < (long)500) {
+      if (millis() - buttonPressTime < 500L) {
         // short press - change camera
         #ifdef DIGISPARK
           DigiMouse.setButtons(MOUSEBTN_LEFT_MASK);
@@ -93,10 +99,9 @@ void loop() {
 
   // move or scroll mouse
   if (x != 0 || y != 0) {
-    unsigned long ms = millis();
     if (scrollMode) {
-      if (ms - lastScrollTime > (long)SCROLL_DELAY) {
-        lastScrollTime = ms;
+      if (millis() - lastScrollTime > 250L * delayFactor) {
+        lastScrollTime = millis();
         #ifdef DIGISPARK
           DigiMouse.move(0, 0, y);
           DigiMouse.update();
@@ -105,8 +110,8 @@ void loop() {
         #endif
       }
     } else {
-      if (ms - lastMoveTime > (long)MOVE_DELAY) {
-        lastMoveTime = ms;
+      if (millis() - lastMoveTime > 25L * delayFactor) {
+        lastMoveTime = millis();
         #ifdef DIGISPARK
           DigiMouse.move(x, y, 0);
           DigiMouse.update();

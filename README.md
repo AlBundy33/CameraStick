@@ -18,5 +18,4 @@ There was no need to install WinAVR because Arduino IDE has also included avrdud
 ```
 
 TODO:
-- check non-linear moving and scrolling
 - test with Euro Truck Simulator 2
