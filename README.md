@@ -17,7 +17,7 @@ There was no need to install WinAVR because Arduino IDE has also included avrdud
 /Applications/Arduino.app/Contents/Java/hardware/tools/avr/bin/avrdude -C /Applications/Arduino.app/Contents/Java/hardware/tools/avr/etc/avrdude.conf -v -p attiny85 -c avrisp -P /dev/cu.usbmodem14201 -b 19200 -U hfuse:w:0x5F:m
 ```
 
-HINT: according to [this page](http://cool-web.de/arduino/tastatur-scrollrad-mit-digispark-usb-entwicklungsboard.htm) you can also use a 100 kOhm resistor instead of chaging the fuses but I havn't tried it.
+HINT: according to [this page](http://cool-web.de/arduino/tastatur-scrollrad-mit-digispark-usb-entwicklungsboard.htm) you can also use a 100 kOhm resistor instead of changing the fuses but I haven't tried it.
 
 # wiring diagram
 ![wiring diagram](images/wiring_diagram.png)
