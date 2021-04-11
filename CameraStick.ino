@@ -102,11 +102,16 @@ void loop() {
     if (scrollMode) {
       if (millis() - lastScrollTime > 250L * delayFactor) {
         lastScrollTime = millis();
+        int steps;
+        if (y > 0)
+          steps = 5;
+        else if (y < 0)
+          steps = -5;
         #ifdef DIGISPARK
-          DigiMouse.move(0, 0, y);
+          DigiMouse.move(0, 0, steps);
           DigiMouse.update();
         #else
-          Mouse.move(0, 0, y);
+          Mouse.move(0, 0, steps);
         #endif
       }
     } else {
