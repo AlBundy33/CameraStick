@@ -28,12 +28,12 @@ bool scrollMode = false;
 
 void setup() {
   pinMode(BUTTON, INPUT_PULLUP);
-#ifdef DIGISPARK
-  DigiMouse.begin();
-#else
-  Mouse.begin();
-  Serial.begin(9600);
-#endif
+  #ifdef DIGISPARK
+    DigiMouse.begin();
+  #else
+    Mouse.begin();
+    Serial.begin(9600);
+  #endif
 }
 
 void loop() {
