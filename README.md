@@ -1,5 +1,6 @@
 # CameraStick
-Use Digispark and a Joystick (e.g KY-023) as a CameraStick
+Use Digispark and a Joystick (e.g KY-023) as a CameraStick.
+I want to us it primarily in Euro Truck Simulator 2 (ETS2).
 
 For pinout check: https://neonaut.neocities.org/blog/2018/digispark-attiny85.html
 
@@ -25,5 +26,3 @@ HINT: according to [this page](http://cool-web.de/arduino/tastatur-scrollrad-mit
 while developing I'm using a leonardo.
 ![wiring diagram (leonardo)](images/wiring_diagram_leonardo.png)
 
-# TODO
-- test with Euro Truck Simulator 2
