@@ -25,4 +25,3 @@ HINT: according to [this page](http://cool-web.de/arduino/tastatur-scrollrad-mit
 
 while developing I'm using a leonardo.
 ![wiring diagram (leonardo)](images/wiring_diagram_leonardo.png)
-
